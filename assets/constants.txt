@@ -1,0 +1,11 @@
+Purple gradient: 
+- 32014E (o%) -> 7201B4 (100%)
+
+Purple accents:
+- D080FF
+
+Dark purple accents:
+- 7201B4
+
+Pink accents:
+- FFDBFE
