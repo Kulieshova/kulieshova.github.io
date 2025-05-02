@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
     body {
@@ -25,8 +26,8 @@
     }
     .orbit-container {
       position: relative;
-      width: 450px;
-      height: 450px;
+      width: 500px;
+      height: 500px;
       margin: 0 auto 2rem;
     }
     /* the light circular guides */
@@ -40,22 +41,21 @@
     .orbit.inner { width: 250px; height: 250px; }
     .orbit.outer { width: 350px; height: 350px; }
 
-    /* each icon wrapper */
     .icon {
-      --angle: 0deg;
-      --r: 0px;
-      --dur: 20s;
       position: absolute;
       top: 50%; left: 50%;
       width: 48px; height: 48px;
-      animation: orbit var(--dur) linear infinite;
+      /* distance & speed */
+      --r: 0px;
+      --angle: 0deg;
+      --dur: 20s;
       transform-origin: center center;
+      animation: orbit var(--dur) linear infinite;
     }
-    /* inner vs outer defaults */
     .inner-icon { --r: 125px; --dur: 20s; }
     .outer-icon { --r: 175px; --dur: 30s; }
 
-    /* the visible icon itself */
+    /* keep the icon upright */
     .icon-content {
       width: 100%; height: 100%;
       background: rgba(255,255,255,0.1);
@@ -67,15 +67,23 @@
       animation: spin-reverse var(--dur) linear infinite;
     }
 
-    /* keyframes for going around */
     @keyframes orbit {
-      0%   { transform: rotate(var(--angle)) translateX(var(--r)); }
-      100% { transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--r)); }
+      from {
+        transform:
+          translate(-50%, -50%)  
+          rotate(var(--angle))  
+          translateX(var(--r)); 
+      }
+      to {
+        transform:
+          translate(-50%, -50%)
+          rotate(calc(var(--angle) + 360deg))
+          translateX(var(--r));
+      }
     }
-    /* keyframes for keeping upright */
     @keyframes spin-reverse {
-      0%   { transform: rotate(calc(-1 * var(--angle))); }
-      100% { transform: rotate(calc(-1 * var(--angle) - 360deg)); }
+      from { transform: rotate(calc(-1 * var(--angle))); }
+      to   { transform: rotate(calc(-1 * var(--angle) - 360deg)); }
     }
 
     /* center avatar */
@@ -106,6 +114,10 @@
     /* social icons */
     .social {
       margin-top: 1.5rem;
+    }
+    .social > a > img {
+      width: 40px; 
+      height: 40px;
     }
     .social a {
       color: #fff;
@@ -142,7 +154,8 @@
       <a href="https://medium.com/@labratblog"><img src="assets/icons/medium.png" alt="medium"/></a>
     </div>
   </div>
+
+  <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+  <script src="assets/script.js"></script>
 </body>
-<script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
-<script src="assets/script.js"></script>
 </html>
