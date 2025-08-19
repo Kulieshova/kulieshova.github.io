@@ -1,161 +1,449 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Nataliia Kulieshova</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
-    body {
-      font-family: "Montserrat", sans-serif;
-      background: linear-gradient(135deg, #32014E 0%, #7201B4 100%);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .hero {
-      max-width: 800px;
-      padding: 2rem;
-    }
-    .orbit-container {
-      position: relative;
-      width: 500px;
-      height: 500px;
-      margin: 0 auto 2rem;
-    }
-    /* the light circular guides */
-    .orbit {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 50%;
-    }
-    .orbit.inner { width: 250px; height: 250px; }
-    .orbit.outer { width: 350px; height: 350px; }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nataliia Kulieshova</title>
+    <meta name="description" content="Portfolio of Nataliia — Product Designer & Frontend Developer." />
+    <link rel="preload" href="assets/facemoji/hero.png" as="image" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <main>
+      <section id="hero" class="hero" aria-label="Intro">
+        <div class="container">
+          <div class="hero__content hero__content--center">
+            <div class="hero__visual">
+              <div class="avatar" aria-hidden="true">
+                <div class="avatar__inner">
+                  <img class="avatar__img" src="assets/facemoji/hero.png" width="420" height="420" alt="Nataliia facemoji" />
+                </div>
+                <!-- Floating stickers around the avatar -->
 
-    .icon {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 48px; height: 48px;
-      /* distance & speed */
-      --r: 0px;
-      --angle: 0deg;
-      --dur: 20s;
-      transform-origin: center center;
-      animation: orbit var(--dur) linear infinite;
-    }
-    .inner-icon { --r: 125px; --dur: 20s; }
-    .outer-icon { --r: 175px; --dur: 30s; }
+                <div class="sticker sticker--laptop">💻</div>
+                <div class="sticker sticker--brain">🧠</div>
+                <div class="sticker sticker--sparkles">✨</div>
+                <div class="sticker sticker--tool">🤟🏻</div>
+              </div>
+            </div>
 
-    /* keep the icon upright */
-    .icon-content {
-      width: 100%; height: 100%;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      animation: spin-reverse var(--dur) linear infinite;
-    }
+            <div class="hero__text hero__text--center">
+              <h1 class="hero__title">Hi there, I'm <span class="highlight">Nataliia Kulieshova</span>!</h1>
+              <p class="hero__subtitle">I am a junior at University of California, Berkeley (go bears!) studying <br><strong>Computer Science (Honors)</strong> and <strong>Cognitive Science</strong>.</p>
 
-    @keyframes orbit {
-      from {
-        transform:
-          translate(-50%, -50%)  
-          rotate(var(--angle))  
-          translateX(var(--r)); 
-      }
-      to {
-        transform:
-          translate(-50%, -50%)
-          rotate(calc(var(--angle) + 360deg))
-          translateX(var(--r));
-      }
-    }
-    @keyframes spin-reverse {
-      from { transform: rotate(calc(-1 * var(--angle))); }
-      to   { transform: rotate(calc(-1 * var(--angle) - 360deg)); }
-    }
+              <nav class="socials" aria-label="Social links">
+                <a class="social-link" href="https://github.com/Kulieshova" aria-label="GitHub" title="GitHub">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.23 3.4 9.66 8.12 11.23.6.12.82-.26.82-.58 0-.3-.01-1.05-.02-2.06-3.3.73-4-1.6-4-1.6-.55-1.43-1.35-1.8-1.35-1.8-1.1-.77.08-.75.08-.75 1.22.09 1.86 1.28 1.86 1.28 1.08 1.9 2.83 1.35 3.52 1.03.11-.8.42-1.35.77-1.66-2.64-.31-5.42-1.36-5.42-6.06 0-1.34.47-2.44 1.25-3.3-.13-.31-.54-1.56.12-3.25 0 0 1.01-.33 3.3 1.26a11.38 11.38 0 0 1 6.01 0c2.28-1.6 3.29-1.26 3.29-1.26.67 1.69.25 2.94.12 3.25.78.86 1.25 1.96 1.25 3.3 0 4.72-2.8 5.74-5.46 6.04.43.38.82 1.12.82 2.26 0 1.63-.02 2.94-.02 3.34 0 .32.22.7.83.58A11.52 11.52 0 0 0 23.5 12.3 11.5 11.5 0 0 0 12 .5z"/></svg>
+                </a>
+                <a class="social-link" href="https://www.linkedin.com/in/nkulieshova/" aria-label="LinkedIn" title="LinkedIn">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zM8.5 8h3.82v2.05h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.14V23h-4v-5.5c0-1.31-.03-2.98-1.82-2.98-1.83 0-2.11 1.43-2.11 2.9V23h-4V8z"/></svg>
+                </a>
+                <a class="social-link" href="https://www.instagram.com/nataliia.kulieshova/" aria-label="Instagram" title="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m-5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10m6.5-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+                </a>
+                <a class="social-link" href="https://medium.com/@labratblog" aria-label="Medium" title="Medium">
+                  <svg viewBox="0 0 1043.63 592.71" aria-hidden="true"><path fill="currentColor" d="M588.67 296.35c0 163.69-131.38 296.36-293.94 296.36S0 460.04 0 296.35 131.38 0 294.73 0 588.67 132.65 588.67 296.35M826.66 296.34c0 154.13-65.69 279.07-146.75 279.07-81.07 0-146.76-124.94-146.76-279.07S598.84 17.27 679.91 17.27c81.06 0 146.75 124.93 146.75 279.07m217 0c0 144.24-23.55 261.26-52.59 261.26-29.04 0-52.59-117.02-52.59-261.26S962.03 35.09 991.07 35.09s52.59 117.01 52.59 261.25"/></svg>
+                </a>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="experience" class="exp" aria-label="Education and Technical Experience">
+        <div class="container">
+          <header class="section-header">
+            <h2 class="section-title">Education & Technical Experience</h2>
+            <p class="section-subtitle">I am a junior at <strong>University of California, Berkeley</strong> (go bears!) studying <strong>Computer Science (Honors)</strong> and <strong>Cognitive Science</strong>.</p>
+          </header>
 
-    /* center avatar */
-    .center-avatar {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #ffffff;
-      border: 3px solid #fff;
-    }
-    .center-avatar img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
+          <div class="exp__stage">
+            <div class="exp__orbit" aria-hidden="true">
+              <div class="exp__ring"></div>
+              <button class="orbit__item" style="--angle: 0deg;" aria-label="Experience node" data-title="Brain Science" data-body="Cognitive Science studies">
+                <img src="assets/facemoji/experience.png" alt="brain" />
+              </button>
+              <button class="orbit__item" style="--angle: 45deg;" aria-label="Experience node" data-title="Development" data-body="Software development">💻</button>
+              <button class="orbit__item" style="--angle: 90deg;" aria-label="Experience node" data-title="Development" data-body="Web development">💻</button>
+              <button class="orbit__item" style="--angle: 135deg;" aria-label="Experience node" data-title="Development" data-body="Frontend development">💻</button>
+              <button class="orbit__item" style="--angle: 180deg;" aria-label="Experience node" data-title="Development" data-body="Backend development">💻</button>
+              <button class="orbit__item" style="--angle: 225deg;" aria-label="Experience node" data-title="Development" data-body="Full-stack development">💻</button>
+              <button class="orbit__item" style="--angle: 270deg;" aria-label="Experience node" data-title="Development" data-body="Mobile development">💻</button>
+              <button class="orbit__item" style="--angle: 315deg;" aria-label="Experience node" data-title="Berkeley" data-body="UC Berkeley student">🐻</button>
+              <button class="orbit__item" style="--angle: 30deg;" aria-label="Experience node" data-title="Education" data-body="Computer Science studies">🎓</button>
+            </div>
 
-    /* intro text */
-    .intro h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .intro p {
-      font-size: 1.1rem;
-      line-height: 1.4;
-    }
+            <div class="exp__avatar">
+              <div class="exp__avatar-bg"></div>
+              <img src="assets/facemoji/experience.png" alt="Nataliia studying" />
+            </div>
 
-    /* social icons */
-    .social {
-      margin-top: 1.5rem;
-    }
-    .social > a > img {
-      width: 40px; 
-      height: 40px;
-    }
-    .social a {
-      color: #fff;
-      margin: 0 0.5rem;
-      font-size: 1.5rem;
-      text-decoration: none;
-      opacity: 0.8;
-      transition: opacity .2s;
-    }
-    .social a:hover { opacity: 1; }
-  </style>
-</head>
-<body>
-  <div class="hero">
-    <div class="orbit-container">
-      <div class="orbit inner"></div>
-      <div class="orbit outer"></div>
-      <div class="center-avatar">
-        <img src="assets/facemojis/hero.png" alt="Nataliia">
+            <div id="exp-popover" class="exp-popover" role="dialog" aria-hidden="true">
+              <div class="exp-popover__content" role="document">
+                <button class="exp-popover__close" aria-label="Close">×</button>
+                <h3 class="exp-popover__title"></h3>
+                <p class="exp-popover__body"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="projects" class="projects" aria-label="Projects">
+        <div class="container">
+          <header class="section-header">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">I am a junior at University of California, Berkeley (go bears!) studying <br><strong>Computer Science (Honors)</strong> and <strong>Cognitive Science</strong>.</p>
+          </header>
+
+          <div class="projects__stage" id="projectsStage">
+            <!-- Dense grid of project bubbles -->
+            <div class="project-bubble" data-project="ai-assistant" data-title="AI Assistant" data-description="Smart conversational AI built with Python and TensorFlow" data-tech="Python, TensorFlow, NLP">🤖</div>
+            <div class="project-bubble" data-project="data-viz" data-title="Data Visualization" data-description="Interactive charts and analytics dashboard" data-tech="D3.js, React, Node.js">📊</div>
+            <div class="project-bubble" data-project="mobile-app" data-title="Mobile App" data-description="Cross-platform productivity app with offline sync" data-tech="React Native, Firebase">📱</div>
+            <div class="project-bubble" data-project="blockchain" data-title="Blockchain Explorer" data-description="Cryptocurrency transaction explorer and analyzer" data-tech="Web3.js, Solidity, React">🔗</div>
+            <div class="project-bubble" data-project="ml-model" data-title="ML Prediction" data-description="Machine learning model for market prediction" data-tech="Python, Scikit-learn, Pandas">🧠</div>
+            <div class="project-bubble" data-project="web-game" data-title="Web Game" data-description="Multiplayer browser-based strategy game" data-tech="WebGL, Socket.io, Express">🎮</div>
+            <div class="project-bubble" data-project="iot-project" data-title="IoT Dashboard" data-description="Smart home automation and monitoring system" data-tech="Arduino, React, MQTT">🏠</div>
+            <div class="project-bubble" data-project="ar-app" data-title="AR Experience" data-description="Augmented reality educational application" data-tech="Unity, ARKit, C#">🥽</div>
+            <div class="project-bubble" data-project="api-service" data-title="API Service" data-description="RESTful microservice with real-time features" data-tech="Node.js, GraphQL, Redis">⚡</div>
+            <div class="project-bubble" data-project="design-system" data-title="Design System" data-description="Component library and design tokens" data-tech="Figma, Storybook, CSS">🎨</div>
+            <div class="project-bubble" data-project="research" data-title="Research Project" data-description="Academic research on cognitive computing" data-tech="Python, R, LaTeX">📚</div>
+            <div class="project-bubble" data-project="ecommerce" data-title="E-commerce Platform" data-description="Full-stack online marketplace" data-tech="Next.js, Stripe, PostgreSQL">🛍️</div>
+            <div class="project-bubble" data-project="devtools" data-title="Developer Tools" data-description="CLI tools for productivity" data-tech="Rust, CLI, Git">🔧</div>
+            <div class="project-bubble" data-project="music-app" data-title="Music Streaming" data-description="Audio streaming platform" data-tech="WebAudio API, Node.js">🎵</div>
+            <div class="project-bubble" data-project="chat-app" data-title="Real-time Chat" data-description="Encrypted messaging application" data-tech="WebRTC, Socket.io">💬</div>
+            <div class="project-bubble" data-project="fitness" data-title="Fitness Tracker" data-description="Health and workout tracking app" data-tech="React Native, HealthKit">💪</div>
+            <div class="project-bubble" data-project="weather" data-title="Weather App" data-description="Beautiful weather forecasting" data-tech="OpenWeather API, PWA">🌤️</div>
+            <div class="project-bubble" data-project="finance" data-title="Finance Tracker" data-description="Personal budget management" data-tech="Chart.js, Express">💰</div>
+            <div class="project-bubble" data-project="photography" data-title="Photo Gallery" data-description="Image sharing and editing" data-tech="Canvas API, AWS S3">📷</div>
+            <div class="project-bubble" data-project="learning" data-title="Learning Platform" data-description="Interactive educational content" data-tech="Three.js, WebVR">🎓</div>
+            <div class="project-bubble" data-project="social" data-title="Social Network" data-description="Community platform" data-tech="GraphQL, Redis">👥</div>
+            <div class="project-bubble" data-project="productivity" data-title="Task Manager" data-description="Project management tool" data-tech="Electron, SQLite">✅</div>
+            <div class="project-bubble" data-project="security" data-title="Security Tool" data-description="Vulnerability scanner" data-tech="Python, Nmap">🔒</div>
+            <div class="project-bubble" data-project="analytics" data-title="Web Analytics" data-description="Traffic analysis dashboard" data-tech="BigQuery, D3.js">📈</div>
+          </div>
+
+          <!-- Project popup modal -->
+          <div id="projectModal" class="project-modal" role="dialog" aria-hidden="true">
+            <div class="project-modal__backdrop"></div>
+            <div class="project-modal__content" role="document">
+              <button class="project-modal__close" aria-label="Close">×</button>
+              <div class="project-modal__icon"></div>
+              <h3 class="project-modal__title"></h3>
+              <p class="project-modal__description"></p>
+              <div class="project-modal__tech"></div>
+              <div class="project-modal__actions">
+                <button class="btn btn--primary">View Project</button>
+                <button class="btn btn--ghost">View Code</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Honors & Achievements Section -->
+    <section id="achievements" class="achievements" aria-label="Selected Awards & Achievements">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title">Selected Awards & Achievements</h2>
+          <p class="section-subtitle">I am a junior at University of California, Berkeley (go bears!) <br>studying <strong>Computer Science (Honors)</strong> and <strong>Cognitive Science</strong>.</p>
+        </header>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Dean's Honor List</h3>
+              <p class="timeline-description">Recognized for academic excellence with a GPA above 3.75 for consecutive semesters at UC Berkeley.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">CS Honor Society Induction</h3>
+              <p class="timeline-description">Inducted into the Computer Science Honor Society for outstanding performance in core CS coursework.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Research Excellence Award</h3>
+              <p class="timeline-description">Awarded for innovative research in cognitive computing and machine learning applications.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Hackathon Winner</h3>
+              <p class="timeline-description">First place in Berkeley's annual AI for Good hackathon with a mental health awareness application.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2022</div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Cal Alumni Scholarship</h3>
+              <p class="timeline-description">Merit-based scholarship awarded for academic achievement and leadership potential in technology.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="intro">
-      <h1>Hi there, I’m Nataliia!</h1>
-      <p>I am a junior at University of California, Berkeley (go bears!)<br>
-         studying Computer Science (Honors) and Cognitive Science.</p>
-    </div>
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="hobbies" aria-label="My Hobbies">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title">My Hobbies</h2>
+          <p class="section-subtitle">I am a junior at University of California, Berkeley (go bears!) <br>studying <strong>Computer Science (Honors)</strong> and <strong>Cognitive Science</strong>.</p>
+        </header>
 
-    <div class="social">
-      <a href="https://github.com/Kulieshova"><img src="assets/icons/github.png" alt="github"/></a>
-      <a href="https://www.linkedin.com/in/nkulieshova/"><img src="assets/icons/linkedin.png" alt="linkedin"/></a>
-      <a href="https://www.instagram.com/nataliia.kulieshova/"><img src="assets/icons/instagram.png" alt="instagram"/></a>
-      <a href="mailto:nataliia.kulieshova@gmail.com"><img src="assets/icons/gmail.png" alt="email"/></a>
-      <a href="https://medium.com/@labratblog"><img src="assets/icons/medium.png" alt="medium"/></a>
-    </div>
-  </div>
+        <div class="hobbies-content">
+          <!-- Moving hobby rows -->
+          <div class="hobby-rows">
+            <!-- First row - moving left -->
+            <div class="hobby-row hobby-row--left">
+              <div class="hobby-card">
+                <span class="hobby-icon">🥖</span>
+                <span class="hobby-text">Baking & cooking</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">✍️</span>
+                <span class="hobby-text">Blog writing</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">📚</span>
+                <span class="hobby-text">Reading</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🏃‍♀️</span>
+                <span class="hobby-text">Running</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🥖</span>
+                <span class="hobby-text">Baking & cooking</span>
+              </div>
+              <!-- Duplicate for seamless loop -->
+              <div class="hobby-card">
+                <span class="hobby-icon">🥖</span>
+                <span class="hobby-text">Baking & cooking</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">✍️</span>
+                <span class="hobby-text">Blog writing</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">📚</span>
+                <span class="hobby-text">Reading</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🏃‍♀️</span>
+                <span class="hobby-text">Running</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🥖</span>
+                <span class="hobby-text">Baking & cooking</span>
+              </div>
+            </div>
 
-  <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
-  <script src="assets/script.js"></script>
-</body>
-</html>
+            <!-- Second row - moving right -->
+            <div class="hobby-row hobby-row--right">
+              <div class="hobby-card">
+                <span class="hobby-icon">🏔️</span>
+                <span class="hobby-text">Hiking & park exploring</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🎮</span>
+                <span class="hobby-text">Video games</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🧩</span>
+                <span class="hobby-text">Puzzles and board games</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🏔️</span>
+                <span class="hobby-text">Hiking & park exploring</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🎮</span>
+                <span class="hobby-text">Video games</span>
+              </div>
+              <!-- Duplicate for seamless loop -->
+              <div class="hobby-card">
+                <span class="hobby-icon">🏔️</span>
+                <span class="hobby-text">Hiking & park exploring</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🎮</span>
+                <span class="hobby-text">Video games</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🧩</span>
+                <span class="hobby-text">Puzzles and board games</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🏔️</span>
+                <span class="hobby-text">Hiking & park exploring</span>
+              </div>
+              <div class="hobby-card">
+                <span class="hobby-icon">🎮</span>
+                <span class="hobby-text">Video games</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Hobby avatar -->
+        <div class="hobby-avatar">
+          <img src="assets/facemoji/hobby.png" alt="Hobby Avatar" class="hobby-avatar__image">
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog" aria-label="My Blog">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title">My Blog</h2>
+          <p class="section-subtitle">I am a junior at University of California, Berkeley (go bears!) <br>studying <strong>Computer Science (Honors)</strong> and <strong>Cognitive Science</strong>.</p>
+        </header>
+
+        <!-- Category Filters -->
+        <div class="blog-filters">
+          <button class="filter-btn filter-btn--active" data-category="all">
+            <span class="filter-icon">🐭</span>
+            <span class="filter-text">Lab Rat Articles</span>
+          </button>
+          <button class="filter-btn" data-category="tech">
+            <span class="filter-icon">💻</span>
+            <span class="filter-text">Technology, AI/ML</span>
+          </button>
+          <button class="filter-btn" data-category="cognitive">
+            <span class="filter-icon">🧠</span>
+            <span class="filter-text">Cognitive Science</span>
+          </button>
+          <button class="filter-btn" data-category="neurotech">
+            <span class="filter-icon">🔬</span>
+            <span class="filter-text">Neurotech</span>
+          </button>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div class="blog-grid">
+          <!-- Blog Post Cards -->
+          <article class="blog-card" data-category="tech">
+            <div class="blog-card__content">
+              <h3 class="blog-card__title">Building AI Models for Mental Health</h3>
+              <p class="blog-card__excerpt">Exploring how machine learning can help identify early signs of mental health issues...</p>
+              <div class="blog-card__meta">
+                <span class="blog-card__date">Dec 15, 2024</span>
+                <span class="blog-card__category">Technology, AI/ML</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="cognitive">
+            <div class="blog-card__content">
+              <h3 class="blog-card__title">The Science of Decision Making</h3>
+              <p class="blog-card__excerpt">How cognitive biases influence our daily choices and what we can do about it...</p>
+              <div class="blog-card__meta">
+                <span class="blog-card__date">Dec 10, 2024</span>
+                <span class="blog-card__category">Cognitive Science</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="neurotech">
+            <div class="blog-card__content">
+              <h3 class="blog-card__title">Brain-Computer Interfaces: The Future</h3>
+              <p class="blog-card__excerpt">Examining the latest developments in BCI technology and its potential applications...</p>
+              <div class="blog-card__meta">
+                <span class="blog-card__date">Dec 5, 2024</span>
+                <span class="blog-card__category">Neurotech</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="tech">
+            <div class="blog-card__content">
+              <h3 class="blog-card__title">Deep Learning in Healthcare</h3>
+              <p class="blog-card__excerpt">How neural networks are revolutionizing medical diagnosis and treatment...</p>
+              <div class="blog-card__meta">
+                <span class="blog-card__date">Nov 28, 2024</span>
+                <span class="blog-card__category">Technology, AI/ML</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="cognitive">
+            <div class="blog-card__content">
+              <h3 class="blog-card__title">Memory and Learning Mechanisms</h3>
+              <p class="blog-card__excerpt">Understanding how the brain forms and retrieves memories for better learning...</p>
+              <div class="blog-card__meta">
+                <span class="blog-card__date">Nov 20, 2024</span>
+                <span class="blog-card__category">Cognitive Science</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card" data-category="neurotech">
+            <div class="blog-card__content">
+              <h3 class="blog-card__title">Neural Prosthetics Research</h3>
+              <p class="blog-card__excerpt">Latest breakthroughs in helping paralyzed patients control devices with thought...</p>
+              <div class="blog-card__meta">
+                <span class="blog-card__date">Nov 15, 2024</span>
+                <span class="blog-card__category">Neurotech</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="blog-actions">
+          <button class="btn btn--load-more">Load More</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" aria-label="Contact Me">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title">Let's chat!</h2>
+          <p class="section-subtitle">I am a junior at University of California, Berkeley (go bears!) <br>studying <strong>Computer Science (Honors)</strong> and <strong>Cognitive Science</strong>.</p>
+        </header>
+
+        <div class="contact-content">
+          <!-- Contact Card -->
+          <div class="contact-card">
+            <div class="contact-section">
+              <h3 class="contact-heading">Emails:</h3>
+              <div class="contact-list">
+                <a href="mailto:nataliia.kulieshova@berkeley.edu" class="contact-link">nataliia.kulieshova@berkeley.edu</a>
+                <a href="mailto:nataliia.kulieshova@gmail.com" class="contact-link">nataliia.kulieshova@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-section">
+              <h3 class="contact-heading">Social media:</h3>
+              <div class="contact-list">
+                <a href="https://linkedin.com/in/nataliia-kulieshova" class="contact-link" target="_blank" rel="noopener">LinkedIn: nataliia-kulieshova</a>
+                <a href="https://github.com/nataliia-kulieshova" class="contact-link" target="_blank" rel="noopener">GitHub: nataliia-kulieshova</a>
+                <a href="https://twitter.com/nataliia_k" class="contact-link" target="_blank" rel="noopener">Twitter: @nataliia_k</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Avatar -->
+          <div class="contact-avatar">
+            <img src="assets/facemoji/contact.png" alt="Contact Avatar" class="contact-avatar__image">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  </body>
+</html> 
