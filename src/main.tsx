@@ -29,6 +29,14 @@ type ExperienceTopic = {
   counterAngle: string;
 };
 
+type Project = {
+  title: string;
+  description: string;
+  icon: string;
+  tone: string;
+  tags: string[];
+};
+
 const skills: Skill[] = [
   { label: "SWE", className: "skill-purple" },
   { label: "AI / ML", className: "skill-pink" },
@@ -118,6 +126,40 @@ const experienceTopics: ExperienceTopic[] = [
     tone: "topic-blue",
     angle: "60deg",
     counterAngle: "-60deg",
+  },
+];
+
+const projects: Project[] = [
+  {
+    title: "Uber Search",
+    description:
+      "Rebuilt search relevance and ranking to improve rider and driver experiences.",
+    icon: "🔍",
+    tone: "project-purple",
+    tags: ["Python", "Lucene", "A/B Testing"],
+  },
+  {
+    title: "Clinical AI Claims Agent",
+    description:
+      "Built an AI agent that extracts, classifies, and summarizes medical claims.",
+    icon: "🧠",
+    tone: "project-pink",
+    tags: ["LLM", "NLP", "FastAPI"],
+  },
+  {
+    title: "EEG Sorting Hat",
+    description:
+      "Classifies cognitive states from EEG signals using deep learning.",
+    icon: "〰️",
+    tone: "project-blue",
+    tags: ["PyTorch", "EEG", "DL"],
+  },
+  {
+    title: "Amigos Route Optimization Platform",
+    description: "Optimizes delivery routes to save time and miles.",
+    icon: "📍",
+    tone: "project-yellow",
+    tags: ["React", "Python", "Maps API"],
   },
 ];
 
@@ -271,6 +313,38 @@ function App() {
             </div>
           </div>
         </aside>
+      </section>
+
+      <section id="projects" className="projects-section" aria-labelledby="projects-title">
+        <div className="projects-heading">
+          <h2 id="projects-title">
+            <span aria-hidden="true">⭐</span>
+            Projects
+          </h2>
+          <p>A few projects I'm proud of.</p>
+        </div>
+
+        <div className="project-grid">
+          {projects.map((project) => (
+            <article className="project-card" key={project.title}>
+              <div className={`project-icon ${project.tone}`} aria-hidden="true">
+                {project.icon}
+              </div>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <div className="project-tags" aria-label={`${project.title} technologies`}>
+                {project.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <a className="github-button" href="https://github.com/" target="_blank" rel="noreferrer">
+          <span>View more on GitHub</span>
+          <span aria-hidden="true">🐙</span>
+        </a>
       </section>
     </main>
   );
