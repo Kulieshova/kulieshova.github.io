@@ -37,6 +37,13 @@ type Project = {
   tags: string[];
 };
 
+type Award = {
+  title: string;
+  description: string;
+  date: string;
+  icon: string;
+};
+
 const skills: Skill[] = [
   { label: "SWE", className: "skill-purple" },
   { label: "AI / ML", className: "skill-pink" },
@@ -160,6 +167,39 @@ const projects: Project[] = [
     icon: "📍",
     tone: "project-yellow",
     tags: ["React", "Python", "Maps API"],
+  },
+];
+
+const awards: Award[] = [
+  {
+    title: "UC Berkeley Honors Program",
+    description: "Recognized for strong academic performance in Computer Science coursework.",
+    date: "2026",
+    icon: "🎓",
+  },
+  {
+    title: "AI Research Fellowship",
+    description: "Selected to explore applied machine learning for human-centered systems.",
+    date: "2025",
+    icon: "🧠",
+  },
+  {
+    title: "Hackathon Finalist",
+    description: "Built a polished product prototype under time pressure with a small team.",
+    date: "2025",
+    icon: "🏆",
+  },
+  {
+    title: "Dean's List",
+    description: "Earned recognition for consistent academic excellence across technical courses.",
+    date: "2024",
+    icon: "⭐",
+  },
+  {
+    title: "Community Leadership Award",
+    description: "Honored for mentoring peers and supporting collaborative student projects.",
+    date: "2024",
+    icon: "🤝",
   },
 ];
 
@@ -345,6 +385,33 @@ function App() {
           <span>View more on GitHub</span>
           <span aria-hidden="true">🐙</span>
         </a>
+      </section>
+
+      <section id="awards" className="awards-section" aria-labelledby="awards-title">
+        <div className="awards-heading">
+          <h2 id="awards-title">Selected Awards & Achievements</h2>
+          <p>
+            I am a junior at University of California, Berkeley studying Computer
+            Science (Honors) and Cognitive Science.
+          </p>
+        </div>
+
+        <ol className="awards-timeline">
+          {awards.map((award) => (
+            <li className="award-item" key={`${award.title}-${award.date}`}>
+              <article className="award-card">
+                <span className="award-icon" aria-hidden="true">
+                  {award.icon}
+                </span>
+                <div>
+                  <time>{award.date}</time>
+                  <h3>{award.title}</h3>
+                  <p>{award.description}</p>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
       </section>
     </main>
   );
