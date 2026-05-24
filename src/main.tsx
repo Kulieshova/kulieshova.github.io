@@ -858,6 +858,54 @@ function App() {
           <p className="blog-end-note">You are all caught up.</p>
         )}
       </section>
+
+      <footer className="site-footer" aria-labelledby="footer-title">
+        <div className="footer-portrait" aria-hidden="true">
+          <span>👋</span>
+          <small>Image placeholder</small>
+          <div className="footer-heart">💗</div>
+        </div>
+
+        <div className="footer-content">
+          <div className="footer-heading">
+            <h2 id="footer-title">Let's Chat! 👋</h2>
+            <p>I'm always excited to connect and collaborate!</p>
+          </div>
+
+          <div className="footer-cards">
+            <article className="contact-card">
+              <div className="contact-icon" aria-hidden="true">
+                ✉️
+              </div>
+              <div>
+                <h3>Email</h3>
+                <p>nataliia.kulieshova@berkeley.edu</p>
+                <a href="mailto:nataliia.kulieshova@berkeley.edu">Send me an email</a>
+              </div>
+            </article>
+
+            <article className="social-card">
+              <h3>Find me online</h3>
+              <div className="social-links">
+                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  in
+                </a>
+                <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub">
+                  🐙
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="Twitter">
+                  🐦
+                </a>
+                <a href="https://www.notion.so/" target="_blank" rel="noreferrer" aria-label="Notion">
+                  N
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <p className="footer-credit">© 2026 Nataliia Kulieshova. Built with 💜 in Berkeley.</p>
+        </div>
+      </footer>
     </main>
   );
 }
