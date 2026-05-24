@@ -59,6 +59,21 @@ type Hobby = {
   duration: string;
 };
 
+type BlogCategory = {
+  id: string;
+  label: string;
+  icon: string;
+};
+
+type BlogArticle = {
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readTime: string;
+  icon: string;
+};
+
 const skills: Skill[] = [
   { label: "SWE", className: "skill-purple" },
   { label: "AI / ML", className: "skill-pink" },
@@ -391,14 +406,104 @@ const hobbies: Hobby[] = [
 
 const randomBubbleDelay = () => 10000 + Math.round(Math.random() * 5000);
 
+const blogCategories: BlogCategory[] = [
+  { id: "lab", label: "Lab Rat Articles", icon: "🐀" },
+  { id: "tech", label: "Technology, AI/ML", icon: "💻" },
+  { id: "cogsci", label: "Cognitive Science", icon: "🧠" },
+  { id: "neurotech", label: "Neurotech", icon: "💪" },
+];
+
+const blogArticles: BlogArticle[] = [
+  {
+    title: "What Makes Search Feel Helpful?",
+    excerpt: "A short reflection on ranking, relevance, and the invisible UX behind good search.",
+    category: "tech",
+    date: "May 2026",
+    readTime: "4 min read",
+    icon: "🔍",
+  },
+  {
+    title: "Tiny Experiments in Attention",
+    excerpt: "Notes on focus, task switching, and why our tools should respect cognitive limits.",
+    category: "cogsci",
+    date: "Apr 2026",
+    readTime: "5 min read",
+    icon: "🧠",
+  },
+  {
+    title: "Learning From Lab Notes",
+    excerpt: "How research logs can become a surprisingly useful design and engineering habit.",
+    category: "lab",
+    date: "Mar 2026",
+    readTime: "3 min read",
+    icon: "🐀",
+  },
+  {
+    title: "Building Agents That Explain Themselves",
+    excerpt: "Why AI systems need visible reasoning, good defaults, and graceful uncertainty.",
+    category: "tech",
+    date: "Feb 2026",
+    readTime: "6 min read",
+    icon: "🤖",
+  },
+  {
+    title: "A Gentle Intro to EEG Signals",
+    excerpt: "A beginner-friendly walkthrough of noisy signals, features, and cognitive states.",
+    category: "neurotech",
+    date: "Jan 2026",
+    readTime: "7 min read",
+    icon: "〰️",
+  },
+  {
+    title: "Interfaces for Human Memory",
+    excerpt: "A few ideas for software that supports recall instead of assuming perfect memory.",
+    category: "cogsci",
+    date: "Dec 2025",
+    readTime: "4 min read",
+    icon: "💭",
+  },
+  {
+    title: "What I Learned Prototyping Fast",
+    excerpt: "Lessons from turning fuzzy ideas into demos without losing sight of users.",
+    category: "lab",
+    date: "Nov 2025",
+    readTime: "5 min read",
+    icon: "🧪",
+  },
+  {
+    title: "Data Pipelines as Creative Constraints",
+    excerpt: "A practical note on why clean data flow is a product design decision too.",
+    category: "tech",
+    date: "Oct 2025",
+    readTime: "4 min read",
+    icon: "📊",
+  },
+  {
+    title: "Neurotech and Everyday Tools",
+    excerpt: "Imagining lightweight systems that make brain-computer interaction feel approachable.",
+    category: "neurotech",
+    date: "Sep 2025",
+    readTime: "6 min read",
+    icon: "⚡",
+  },
+];
+
 function App() {
   const [activeTopicId, setActiveTopicId] = useState(experienceTopics[0].id);
   const [activeHobbyId, setActiveHobbyId] = useState(hobbies[0].id);
   const [poppedHobbies, setPoppedHobbies] = useState<Set<string>>(new Set());
+  const [activeBlogCategory, setActiveBlogCategory] = useState("all");
+  const [visibleBlogCount, setVisibleBlogCount] = useState(6);
   const hobbyTimers = useRef<Record<string, number>>({});
   const activeTopic =
     experienceTopics.find((topic) => topic.id === activeTopicId) ?? experienceTopics[0];
   const activeHobby = hobbies.find((hobby) => hobby.id === activeHobbyId) ?? hobbies[0];
+  const filteredBlogArticles =
+    activeBlogCategory === "all"
+      ? blogArticles
+      : blogArticles.filter((article) => article.category === activeBlogCategory);
+  const visibleBlogArticles = filteredBlogArticles.slice(0, visibleBlogCount);
+  const canLoadMoreBlogs = visibleBlogCount < filteredBlogArticles.length;
 
   useEffect(() => {
     return () => {
@@ -423,6 +528,11 @@ function App() {
       });
       delete hobbyTimers.current[hobbyId];
     }, randomBubbleDelay());
+  };
+
+  const chooseBlogCategory = (categoryId: string) => {
+    setActiveBlogCategory(categoryId);
+    setVisibleBlogCount(6);
   };
 
   return (
@@ -679,6 +789,74 @@ function App() {
             <small>{activeHobby.info}</small>
           </article>
         </div>
+      </section>
+
+      <section id="blog" className="blog-section" aria-labelledby="blog-title">
+        <div className="blog-heading">
+          <h2 id="blog-title">My Blog</h2>
+          <p>
+            I am a junior at University of California, Berkeley studying Computer
+            Science (Honors) and Cognitive Science.
+          </p>
+        </div>
+
+        <div className="blog-filters" aria-label="Blog categories">
+          <button
+            className={activeBlogCategory === "all" ? "is-active" : ""}
+            onClick={() => chooseBlogCategory("all")}
+            type="button"
+          >
+            <span aria-hidden="true">✨</span>
+            All Articles
+          </button>
+          {blogCategories.map((category) => (
+            <button
+              className={activeBlogCategory === category.id ? "is-active" : ""}
+              key={category.id}
+              onClick={() => chooseBlogCategory(category.id)}
+              type="button"
+            >
+              <span aria-hidden="true">{category.icon}</span>
+              {category.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="blog-grid">
+          {visibleBlogArticles.map((article) => {
+            const category = blogCategories.find((item) => item.id === article.category);
+
+            return (
+              <article className="blog-card" key={`${article.title}-${article.date}`}>
+                <div className="blog-card-image" aria-hidden="true">
+                  <span>{article.icon}</span>
+                  <small>Article placeholder</small>
+                </div>
+                <div className="blog-card-body">
+                  <div className="blog-card-meta">
+                    <span>{category?.label ?? "Article"}</span>
+                    <time>{article.date}</time>
+                  </div>
+                  <h3>{article.title}</h3>
+                  <p>{article.excerpt}</p>
+                  <span className="read-time">{article.readTime}</span>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {canLoadMoreBlogs ? (
+          <button
+            className="blog-load-more"
+            onClick={() => setVisibleBlogCount((count) => count + 3)}
+            type="button"
+          >
+            Load More
+          </button>
+        ) : (
+          <p className="blog-end-note">You are all caught up.</p>
+        )}
       </section>
     </main>
   );
