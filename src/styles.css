@@ -41,6 +41,8 @@ a {
     radial-gradient(circle at 72% 65%, rgba(191, 45, 255, 0.92) 0 16%, transparent 39%),
     radial-gradient(circle at 82% 20%, rgba(97, 16, 203, 0.78) 0 18%, transparent 42%),
     linear-gradient(122deg, #25006c 0%, #430090 50%, #6f12dd 100%);
+  background-size: 120% 120%, 130% 130%, 100% 100%;
+  animation: gradientDrift 16s ease-in-out infinite alternate;
 }
 
 .hero-shell::before,
@@ -62,12 +64,127 @@ a {
   background-size:
     335px 255px,
     420px 300px;
+  animation: starDrift 24s linear infinite;
 }
 
 .hero-shell::after {
   background:
     linear-gradient(90deg, rgba(23, 0, 80, 0.52), transparent 34%),
     linear-gradient(180deg, rgba(24, 0, 58, 0.22), transparent 42%);
+}
+
+.particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle-field span {
+  position: absolute;
+  width: 4px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.75);
+  opacity: 0;
+  animation: particleFloat 9s ease-in-out infinite;
+}
+
+.particle-field span:nth-child(1) {
+  top: 21%;
+  left: 31%;
+  animation-delay: -1s;
+}
+
+.particle-field span:nth-child(2) {
+  top: 58%;
+  left: 4%;
+  animation-delay: -3.4s;
+}
+
+.particle-field span:nth-child(3) {
+  top: 69%;
+  left: 45%;
+  animation-delay: -5.8s;
+}
+
+.particle-field span:nth-child(4) {
+  top: 31%;
+  left: 51%;
+  animation-delay: -2.1s;
+}
+
+.particle-field span:nth-child(5) {
+  top: 18%;
+  left: 72%;
+  animation-delay: -6.6s;
+}
+
+.particle-field span:nth-child(6) {
+  top: 74%;
+  left: 87%;
+  animation-delay: -4.2s;
+}
+
+.particle-field span:nth-child(7) {
+  top: 42%;
+  left: 92%;
+  animation-delay: -7.5s;
+}
+
+.particle-field span:nth-child(8) {
+  top: 82%;
+  left: 17%;
+  animation-delay: -8.1s;
+}
+
+.particle-field span:nth-child(9) {
+  top: 14%;
+  left: 12%;
+  animation-delay: -2.8s;
+}
+
+.particle-field span:nth-child(10) {
+  top: 88%;
+  left: 66%;
+  animation-delay: -4.9s;
+}
+
+.particle-field span:nth-child(11) {
+  top: 52%;
+  left: 76%;
+  animation-delay: -6.9s;
+}
+
+.particle-field span:nth-child(12) {
+  top: 63%;
+  left: 55%;
+  animation-delay: -1.7s;
+}
+
+.particle-field span:nth-child(13) {
+  top: 26%;
+  left: 84%;
+  animation-delay: -3.9s;
+}
+
+.particle-field span:nth-child(14) {
+  top: 76%;
+  left: 34%;
+  animation-delay: -5.2s;
+}
+
+.particle-field span:nth-child(15) {
+  top: 36%;
+  left: 18%;
+  animation-delay: -7.9s;
+}
+
+.particle-field span:nth-child(16) {
+  top: 91%;
+  left: 94%;
+  animation-delay: -2.4s;
 }
 
 .nav,
@@ -213,11 +330,25 @@ h1 {
   justify-self: center;
 }
 
+.portrait-stage::before {
+  position: absolute;
+  inset: 18%;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 58%),
+    conic-gradient(from 90deg, rgba(255, 129, 217, 0.48), rgba(135, 180, 255, 0.2), rgba(255, 214, 111, 0.4), rgba(255, 129, 217, 0.48));
+  content: "";
+  filter: blur(18px);
+  opacity: 0.78;
+  animation: auraPulse 7s ease-in-out infinite;
+}
+
 .orbit-ring {
   position: absolute;
   inset: 8%;
   border: 2px dashed rgba(255, 255, 255, 0.25);
   border-radius: 999px;
+  animation: ringSpin 52s linear infinite;
 }
 
 .portrait-frame {
@@ -255,6 +386,7 @@ h1 {
 .placeholder-emoji {
   font-size: clamp(3.4rem, 7vw, 5.8rem);
   filter: drop-shadow(0 8px 14px rgba(30, 0, 80, 0.35));
+  animation: placeholderBob 4.5s ease-in-out infinite;
 }
 
 .placeholder-text {
@@ -264,8 +396,23 @@ h1 {
   line-height: 1.25;
 }
 
+.orbit-track {
+  position: absolute;
+  inset: 8%;
+  z-index: 2;
+  border-radius: 999px;
+  transform: rotate(var(--orbit-angle));
+  animation: orbitSpin var(--orbit-duration) linear infinite;
+}
+
+.orbit-track:nth-of-type(even) {
+  animation-direction: reverse;
+}
+
 .orbit-icon {
   position: absolute;
+  top: 0;
+  left: 50%;
   z-index: 2;
   display: grid;
   place-items: center;
@@ -278,34 +425,33 @@ h1 {
     0 8px 20px rgba(28, 0, 80, 0.32),
     inset 0 2px 8px rgba(255, 255, 255, 0.58);
   font-size: clamp(2rem, 3.2vw, 2.8rem);
+  transform: translate(-50%, -50%);
+  animation: iconBob 3.8s ease-in-out infinite;
 }
 
-.orbit-top {
-  top: 7%;
-  left: 52%;
-  transform: translateX(-50%);
+.orbit-icon span {
+  display: block;
+  animation: appleTwirl 6s ease-in-out infinite;
+  transform-origin: 50% 58%;
+}
+
+.orbit-pink {
   background: linear-gradient(145deg, #fff6fb, #ffc8ec);
 }
 
-.orbit-left {
-  top: 32%;
-  left: 7%;
+.orbit-lilac {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(180, 114, 245, 0.84));
 }
 
-.orbit-right {
-  top: 34%;
-  right: 2%;
+.orbit-violet {
+  background: linear-gradient(145deg, #f7efff, #a876ef);
 }
 
-.orbit-bottom-left {
-  bottom: 18%;
-  left: 8%;
+.orbit-blue {
   background: linear-gradient(145deg, #d7edff, #7797ef);
 }
 
-.orbit-bottom-right {
-  right: 9%;
-  bottom: 16%;
+.orbit-yellow {
   background: linear-gradient(145deg, #fff7db, #ffd362);
 }
 
@@ -318,6 +464,115 @@ h1 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+@keyframes gradientDrift {
+  from {
+    background-position:
+      48% 52%,
+      70% 22%,
+      center;
+  }
+
+  to {
+    background-position:
+      64% 58%,
+      86% 30%,
+      center;
+  }
+}
+
+@keyframes starDrift {
+  from {
+    background-position:
+      8% 68%,
+      34% 21%;
+  }
+
+  to {
+    background-position:
+      18% 56%,
+      24% 31%;
+  }
+}
+
+@keyframes particleFloat {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.7);
+  }
+
+  35%,
+  70% {
+    opacity: 0.92;
+  }
+
+  50% {
+    transform: translate3d(18px, -28px, 0) scale(1.15);
+  }
+}
+
+@keyframes auraPulse {
+  0%,
+  100% {
+    opacity: 0.54;
+    transform: scale(0.96) rotate(0deg);
+  }
+
+  50% {
+    opacity: 0.84;
+    transform: scale(1.08) rotate(18deg);
+  }
+}
+
+@keyframes ringSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitSpin {
+  from {
+    transform: rotate(var(--orbit-angle));
+  }
+
+  to {
+    transform: rotate(calc(var(--orbit-angle) + 360deg));
+  }
+}
+
+@keyframes iconBob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes appleTwirl {
+  0%,
+  100% {
+    transform: rotate(-8deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(12deg) scale(1.08);
+  }
+}
+
+@keyframes placeholderBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(4deg);
+  }
 }
 
 @media (max-width: 900px) {
@@ -405,5 +660,16 @@ h1 {
   .orbit-icon {
     width: 56px;
     font-size: 1.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

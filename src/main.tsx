@@ -1,4 +1,5 @@
 import { StrictMode } from "react";
+import type { CSSProperties } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -10,7 +11,9 @@ type Skill = {
 type OrbitIcon = {
   icon: string;
   label: string;
-  className: string;
+  tone: string;
+  angle: string;
+  duration: string;
 };
 
 const skills: Skill[] = [
@@ -21,16 +24,24 @@ const skills: Skill[] = [
 ];
 
 const orbitIcons: OrbitIcon[] = [
-  { icon: "🍎", label: "Cognitive science", className: "orbit-top" },
-  { icon: "🍎", label: "AI projects", className: "orbit-left" },
-  { icon: "🍎", label: "Code", className: "orbit-right" },
-  { icon: "🍎", label: "Developer tools", className: "orbit-bottom-left" },
-  { icon: "🍎", label: "Creative ideas", className: "orbit-bottom-right" },
+  { icon: "🍎", label: "Cognitive science", tone: "orbit-pink", angle: "8deg", duration: "34s" },
+  { icon: "🍎", label: "AI projects", tone: "orbit-lilac", angle: "276deg", duration: "38s" },
+  { icon: "🍎", label: "Code", tone: "orbit-violet", angle: "78deg", duration: "32s" },
+  { icon: "🍎", label: "Developer tools", tone: "orbit-blue", angle: "226deg", duration: "36s" },
+  { icon: "🍎", label: "Creative ideas", tone: "orbit-yellow", angle: "134deg", duration: "40s" },
 ];
+
+const particles = Array.from({ length: 16 }, (_, index) => index);
 
 function App() {
   return (
     <main className="hero-shell">
+      <div className="particle-field" aria-hidden="true">
+        {particles.map((particle) => (
+          <span key={particle} />
+        ))}
+      </div>
+
       <nav className="nav" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="Nataliia Kulieshova home">
           NK
@@ -80,8 +91,19 @@ function App() {
             </div>
           </div>
           {orbitIcons.map((item) => (
-            <div className={`orbit-icon ${item.className}`} key={item.label}>
-              <span aria-hidden="true">{item.icon}</span>
+            <div
+              className="orbit-track"
+              key={item.label}
+              style={
+                {
+                  "--orbit-angle": item.angle,
+                  "--orbit-duration": item.duration,
+                } as CSSProperties
+              }
+            >
+              <div className={`orbit-icon ${item.tone}`}>
+                <span aria-hidden="true">{item.icon}</span>
+              </div>
               <span className="sr-only">{item.label}</span>
             </div>
           ))}
