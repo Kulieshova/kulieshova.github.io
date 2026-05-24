@@ -1,4 +1,4 @@
-import { StrictMode, useState } from "react";
+import { StrictMode, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
@@ -42,6 +42,21 @@ type Award = {
   description: string;
   date: string;
   icon: string;
+};
+
+type Hobby = {
+  id: string;
+  title: string;
+  description: string;
+  info: string;
+  icon: string;
+  imageEmoji: string;
+  imageLabel: string;
+  x: string;
+  y: string;
+  size: string;
+  delay: string;
+  duration: string;
 };
 
 const skills: Skill[] = [
@@ -203,10 +218,212 @@ const awards: Award[] = [
   },
 ];
 
+const hobbies: Hobby[] = [
+  {
+    id: "music",
+    title: "Music",
+    description: "I love using playlists as tiny mood boards for deep work and long walks.",
+    info: "Current vibe: energetic songs that make debugging feel cinematic.",
+    icon: "🎧",
+    imageEmoji: "🎧",
+    imageLabel: "Music placeholder",
+    x: "14%",
+    y: "41%",
+    size: "54px",
+    delay: "-1s",
+    duration: "7.5s",
+  },
+  {
+    id: "sleep",
+    title: "Rest",
+    description: "Good rest keeps my brain soft enough for hard problems.",
+    info: "A reset nap can rescue an entire afternoon.",
+    icon: "😴",
+    imageEmoji: "🌙",
+    imageLabel: "Rest placeholder",
+    x: "36%",
+    y: "24%",
+    size: "62px",
+    delay: "-4s",
+    duration: "8.5s",
+  },
+  {
+    id: "brain",
+    title: "Cognitive Science",
+    description: "I am endlessly curious about memory, attention, and how people learn.",
+    info: "The best interfaces feel like they understand human limits.",
+    icon: "🧠",
+    imageEmoji: "🧠",
+    imageLabel: "Cognitive science placeholder",
+    x: "66%",
+    y: "24%",
+    size: "62px",
+    delay: "-2.8s",
+    duration: "8s",
+  },
+  {
+    id: "lifting",
+    title: "Strength Training",
+    description: "Lifting gives me a satisfying way to practice patience and consistency.",
+    info: "Small progress compounds beautifully when you keep showing up.",
+    icon: "💪",
+    imageEmoji: "💪",
+    imageLabel: "Training placeholder",
+    x: "25%",
+    y: "35%",
+    size: "58px",
+    delay: "-5.2s",
+    duration: "7.8s",
+  },
+  {
+    id: "data",
+    title: "Data Visualization",
+    description: "I enjoy turning messy information into something people can actually read.",
+    info: "A good chart is equal parts accuracy, empathy, and restraint.",
+    icon: "📊",
+    imageEmoji: "📊",
+    imageLabel: "Data placeholder",
+    x: "43%",
+    y: "28%",
+    size: "66px",
+    delay: "-1.7s",
+    duration: "8.2s",
+  },
+  {
+    id: "flowers",
+    title: "Flowers",
+    description: "I love small visual details that make ordinary spaces feel considered.",
+    info: "Sunflowers are basically optimism with petals.",
+    icon: "🌻",
+    imageEmoji: "🌻",
+    imageLabel: "Flowers placeholder",
+    x: "56%",
+    y: "27%",
+    size: "56px",
+    delay: "-3.1s",
+    duration: "7.2s",
+  },
+  {
+    id: "weather",
+    title: "Morning Walks",
+    description: "A bright walk helps me sort through ideas before the day gets loud.",
+    info: "The best ideas often arrive when I stop staring directly at them.",
+    icon: "🌤️",
+    imageEmoji: "🌤️",
+    imageLabel: "Walks placeholder",
+    x: "70%",
+    y: "35%",
+    size: "60px",
+    delay: "-6s",
+    duration: "9s",
+  },
+  {
+    id: "robotics",
+    title: "Creative Tech",
+    description: "I like playful prototypes that blend code, interaction, and personality.",
+    info: "A tiny delightful detail can make a tool feel alive.",
+    icon: "🤖",
+    imageEmoji: "🤖",
+    imageLabel: "Creative tech placeholder",
+    x: "94%",
+    y: "45%",
+    size: "48px",
+    delay: "-2.2s",
+    duration: "7.6s",
+  },
+  {
+    id: "travel",
+    title: "Exploring",
+    description: "New places give me fresh patterns to notice and fresh snacks to try.",
+    info: "I collect little observations more than souvenirs.",
+    icon: "🧭",
+    imageEmoji: "🧭",
+    imageLabel: "Exploring placeholder",
+    x: "86%",
+    y: "31%",
+    size: "58px",
+    delay: "-4.8s",
+    duration: "8.6s",
+  },
+  {
+    id: "reading",
+    title: "Reading",
+    description: "Books are my favorite way to borrow another mind for a while.",
+    info: "I bounce between science, essays, and stories with sharp characters.",
+    icon: "📚",
+    imageEmoji: "📚",
+    imageLabel: "Reading placeholder",
+    x: "8%",
+    y: "45%",
+    size: "42px",
+    delay: "-3.7s",
+    duration: "7.4s",
+  },
+  {
+    id: "coffee",
+    title: "Cafe Work",
+    description: "A cozy cafe makes planning, writing, and prototyping feel easier.",
+    info: "Background hum plus a good drink is a powerful little ritual.",
+    icon: "☕",
+    imageEmoji: "☕",
+    imageLabel: "Cafe placeholder",
+    x: "77%",
+    y: "47%",
+    size: "42px",
+    delay: "-6.4s",
+    duration: "8.8s",
+  },
+  {
+    id: "graduation",
+    title: "Learning",
+    description: "I like collecting new skills and connecting them back to things I already know.",
+    info: "The fun part is when two unrelated ideas suddenly shake hands.",
+    icon: "🎓",
+    imageEmoji: "🎓",
+    imageLabel: "Learning placeholder",
+    x: "10%",
+    y: "50%",
+    size: "44px",
+    delay: "-2.5s",
+    duration: "8.1s",
+  },
+];
+
+const randomBubbleDelay = () => 10000 + Math.round(Math.random() * 5000);
+
 function App() {
   const [activeTopicId, setActiveTopicId] = useState(experienceTopics[0].id);
+  const [activeHobbyId, setActiveHobbyId] = useState(hobbies[0].id);
+  const [poppedHobbies, setPoppedHobbies] = useState<Set<string>>(new Set());
+  const hobbyTimers = useRef<Record<string, number>>({});
   const activeTopic =
     experienceTopics.find((topic) => topic.id === activeTopicId) ?? experienceTopics[0];
+  const activeHobby = hobbies.find((hobby) => hobby.id === activeHobbyId) ?? hobbies[0];
+
+  useEffect(() => {
+    return () => {
+      Object.values(hobbyTimers.current).forEach(window.clearTimeout);
+    };
+  }, []);
+
+  const popHobby = (hobbyId: string) => {
+    setActiveHobbyId(hobbyId);
+    setPoppedHobbies((current) => {
+      const next = new Set(current);
+      next.add(hobbyId);
+      return next;
+    });
+
+    window.clearTimeout(hobbyTimers.current[hobbyId]);
+    hobbyTimers.current[hobbyId] = window.setTimeout(() => {
+      setPoppedHobbies((current) => {
+        const next = new Set(current);
+        next.delete(hobbyId);
+        return next;
+      });
+      delete hobbyTimers.current[hobbyId];
+    }, randomBubbleDelay());
+  };
 
   return (
     <main className="portfolio-page">
@@ -412,6 +629,56 @@ function App() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section id="hobbies" className="hobbies-section" aria-labelledby="hobbies-title">
+        <div className="hobbies-heading">
+          <h2 id="hobbies-title">My Hobbies</h2>
+          <p>
+            A few small joys that keep me curious, rested, and creatively charged.
+          </p>
+        </div>
+
+        <div className="hobby-bubble-field" aria-label="Interactive hobby bubbles">
+          {hobbies.map((hobby) => {
+            const isPopped = poppedHobbies.has(hobby.id);
+
+            return (
+              <button
+                className={`hobby-bubble ${isPopped ? "is-popped" : ""}`}
+                disabled={isPopped}
+                key={hobby.id}
+                onClick={() => popHobby(hobby.id)}
+                style={
+                  {
+                    "--bubble-x": hobby.x,
+                    "--bubble-y": hobby.y,
+                    "--bubble-size": hobby.size,
+                    "--bubble-delay": hobby.delay,
+                    "--bubble-duration": hobby.duration,
+                  } as CSSProperties
+                }
+                type="button"
+                aria-label={`Pop ${hobby.title} bubble`}
+              >
+                <span aria-hidden="true">{hobby.icon}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="hobby-feature" aria-live="polite">
+          <div className="hobby-photo-placeholder">
+            <span aria-hidden="true">{activeHobby.imageEmoji}</span>
+            <small>{activeHobby.imageLabel}</small>
+          </div>
+          <article className="hobby-info">
+            <time>Now showing</time>
+            <h3>{activeHobby.title}</h3>
+            <p>{activeHobby.description}</p>
+            <small>{activeHobby.info}</small>
+          </article>
+        </div>
       </section>
     </main>
   );
