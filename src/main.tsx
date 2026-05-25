@@ -1,6 +1,14 @@
 import { StrictMode, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { createRoot } from "react-dom/client";
+import expBerkeley from "./assets/exp_berkeley.png";
+import expBlueprint from "./assets/exp_blueprint.png";
+import expCornell from "./assets/exp_cornell.png";
+import expHci from "./assets/exp_hci.png";
+import expMicrosoft from "./assets/exp_microsoft.png";
+import expUber from "./assets/exp_uber.png";
+import expWalkerLab from "./assets/exp_walker_lab.png";
+import heroAvatar from "./assets/hero_avatar.png";
 import "./styles.css";
 
 type Skill = {
@@ -23,6 +31,7 @@ type ExperienceTopic = {
   body: string;
   imageLabel: string;
   imageEmoji: string;
+  imageSrc: string;
   icon: string;
   tone: string;
   angle: string;
@@ -77,16 +86,16 @@ type BlogArticle = {
 const skills: Skill[] = [
   { label: "SWE", className: "skill-purple" },
   { label: "AI / ML", className: "skill-pink" },
-  { label: "Cognitive Science", className: "skill-yellow" },
-  { label: "Creative Computing", className: "skill-blue" },
+  { label: "Research", className: "skill-yellow" },
+  { label: "Assistive Technology", className: "skill-blue" },
 ];
 
 const orbitIcons: OrbitIcon[] = [
-  { icon: "🍎", label: "Cognitive science", tone: "orbit-pink", angle: "8deg", duration: "34s" },
-  { icon: "🍎", label: "AI projects", tone: "orbit-lilac", angle: "276deg", duration: "38s" },
-  { icon: "🍎", label: "Code", tone: "orbit-violet", angle: "78deg", duration: "32s" },
-  { icon: "🍎", label: "Developer tools", tone: "orbit-blue", angle: "226deg", duration: "36s" },
-  { icon: "🍎", label: "Creative ideas", tone: "orbit-yellow", angle: "134deg", duration: "40s" },
+  { icon: "🧠", label: "Cognitive science", tone: "orbit-pink", angle: "8deg", duration: "34s" },
+  { icon: "💻", label: "Computer science", tone: "orbit-lilac", angle: "276deg", duration: "38s" },
+  { icon: "🧪", label: "Research", tone: "orbit-violet", angle: "78deg", duration: "32s" },
+  { icon: "🦾", label: "Accessibility", tone: "orbit-blue", angle: "226deg", duration: "36s" },
+  { icon: "🤟", label: "Creative ideas", tone: "orbit-yellow", angle: "134deg", duration: "40s" },
 ];
 
 const particles = Array.from({ length: 16 }, (_, index) => index);
@@ -94,11 +103,12 @@ const particles = Array.from({ length: 16 }, (_, index) => index);
 const experienceTopics: ExperienceTopic[] = [
   {
     id: "search",
-    title: "Search Systems",
+    title: "Uber SWE Intern",
     subtitle: "Information retrieval & ranking",
     body: "I like building systems that help people find the right information quickly, from ranking logic to thoughtful result experiences.",
-    imageLabel: "Search systems placeholder",
+    imageLabel: "Uber search internship",
     imageEmoji: "🔍",
+    imageSrc: expUber,
     icon: "🔍",
     tone: "topic-pink",
     angle: "0deg",
@@ -106,63 +116,94 @@ const experienceTopics: ExperienceTopic[] = [
   },
   {
     id: "ai",
-    title: "AI / Machine Learning",
+    title: "Cornell x Break Through AI/ML Fellow",
     subtitle: "Models, agents & data pipelines",
     body: "I work across practical AI workflows: preparing data, designing model-powered features, and turning prototypes into useful tools.",
-    imageLabel: "AI and machine learning placeholder",
+    imageLabel: "Cornell AI/ML fellowship",
     imageEmoji: "🧠",
+    imageSrc: expCornell,
     icon: "🧠",
     tone: "topic-rose",
-    angle: "300deg",
-    counterAngle: "-300deg",
+    angle: "45deg",
+    counterAngle: "-45deg",
   },
   {
     id: "research",
-    title: "Research",
+    title: "Sleep Researcher",
     subtitle: "Cognitive science & neurotech",
     body: "My cognitive science background keeps me curious about attention, learning, memory, and how technology can support human thinking.",
-    imageLabel: "Research placeholder",
+    imageLabel: "Walker Lab sleep research",
     imageEmoji: "🧪",
+    imageSrc: expWalkerLab,
     icon: "🧪",
     tone: "topic-purple",
+    angle: "90deg",
+    counterAngle: "-90deg",
+  },
+  {
+    id: "software",
+    title: "Uber SWE Intern",
+    subtitle: "Full-stack development",
+    body: "I enjoy shipping polished, reliable interfaces backed by clean data flows, accessible components, and maintainable TypeScript.",
+    imageLabel: "Uber software engineering",
+    imageEmoji: "💻",
+    imageSrc: expUber,
+    icon: "💻",
+    tone: "topic-lilac",
+    angle: "135deg",
+    counterAngle: "-135deg",
+  },
+  {
+    id: "leadership",
+    title: "HCI and Accessibility Researcher",
+    subtitle: "Teamwork & mentorship",
+    body: "I care about helping teams communicate clearly, support one another, and turn ambitious ideas into steady progress.",
+    imageLabel: "HCI accessibility research",
+    imageEmoji: "🤝",
+    imageSrc: expHci,
+    icon: "🤝",
+    tone: "topic-yellow",
     angle: "180deg",
     counterAngle: "-180deg",
   },
   {
-    id: "software",
-    title: "Software Engineering",
-    subtitle: "Full-stack development",
-    body: "I enjoy shipping polished, reliable interfaces backed by clean data flows, accessible components, and maintainable TypeScript.",
-    imageLabel: "Software engineering placeholder",
-    imageEmoji: "💻",
-    icon: "💻",
-    tone: "topic-lilac",
-    angle: "240deg",
-    counterAngle: "-240deg",
-  },
-  {
-    id: "leadership",
-    title: "Leadership",
-    subtitle: "Teamwork & mentorship",
-    body: "I care about helping teams communicate clearly, support one another, and turn ambitious ideas into steady progress.",
-    imageLabel: "Leadership placeholder",
-    imageEmoji: "🤝",
-    icon: "🤝",
-    tone: "topic-yellow",
-    angle: "120deg",
-    counterAngle: "-120deg",
-  },
-  {
     id: "systems",
-    title: "Technical Foundations",
+    title: "UC Berkeley CS + CogSci Student (Honors)",
     subtitle: "Algorithms, data & CS fundamentals",
     body: "Coursework and projects have strengthened my foundations in algorithms, data structures, databases, and system design.",
-    imageLabel: "Technical foundations placeholder",
+    imageLabel: "UC Berkeley",
     imageEmoji: "⚙️",
+    imageSrc: expBerkeley,
     icon: "⚙️",
     tone: "topic-blue",
-    angle: "60deg",
-    counterAngle: "-60deg",
+    angle: "225deg",
+    counterAngle: "-225deg",
+  },
+  {
+    id: "microsoft",
+    title: "Microsoft SWE Intern",
+    subtitle: "Software engineering & product systems",
+    body: "I am excited to keep growing as an engineer through production systems, collaboration, and user-centered product work.",
+    imageLabel: "Microsoft software engineering",
+    imageEmoji: "🥳",
+    imageSrc: expMicrosoft,
+    icon: "🥳",
+    tone: "topic-blue",
+    angle: "270deg",
+    counterAngle: "-270deg",
+  },
+  {
+    id: "blueprint",
+    title: "Berkeley Blueprint Developer",
+    subtitle: "Tech for social good",
+    body: "I build thoughtful software with a mission-driven team, focusing on tools that help community organizations do their work better.",
+    imageLabel: "Berkeley Blueprint",
+    imageEmoji: "📐",
+    imageSrc: expBlueprint,
+    icon: "📐",
+    tone: "topic-purple",
+    angle: "315deg",
+    counterAngle: "-315deg",
   },
 ];
 
@@ -562,11 +603,11 @@ function App() {
         <section id="top" className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <p className="eyebrow">
-              Hi there, <span aria-hidden="true">👋</span>
+              hi there <span aria-hidden="true">👋</span>
             </p>
             <h1 id="hero-title">I'm Nataliia Kulieshova!</h1>
             <p className="study-line">
-              I'm a junior at <strong>UC Berkeley</strong> studying Computer Science and
+              I'm a senior at <strong>UC Berkeley</strong> studying Computer Science and
               Cognitive Science.
             </p>
             <p className="intro">
@@ -586,10 +627,7 @@ function App() {
             <div className="orbit-ring" aria-hidden="true" />
             <div className="portrait-frame">
               <div className="portrait-placeholder">
-                <span className="placeholder-emoji" aria-hidden="true">
-                  🍎
-                </span>
-                <span className="placeholder-text">Image placeholder</span>
+                <img className="placeholder-emoji" aria-hidden="true" src={heroAvatar} alt="Profile picture" />
               </div>
             </div>
             {orbitIcons.map((item) => (
@@ -629,10 +667,7 @@ function App() {
         <div className="experience-orbit" aria-label="Interactive experience topics">
           <div className="experience-ring" aria-hidden="true" />
           <div className="experience-portrait" aria-live="polite">
-            <span className="experience-placeholder-emoji" aria-hidden="true">
-              {activeTopic.imageEmoji}
-            </span>
-            <span>{activeTopic.imageLabel}</span>
+            <img className="experience-image" src={activeTopic.imageSrc} alt={activeTopic.imageLabel} />
           </div>
 
           {experienceTopics.map((topic) => (
@@ -657,7 +692,7 @@ function App() {
 
         <aside className="experience-details" aria-live="polite">
           <ul className="topic-list">
-            {experienceTopics.slice(0, 5).map((topic) => (
+            {experienceTopics.map((topic) => (
               <li className={topic.id === activeTopicId ? "is-active" : ""} key={topic.id}>
                 <button type="button" onClick={() => setActiveTopicId(topic.id)}>
                   <span className="topic-dot" aria-hidden="true" />
@@ -887,10 +922,10 @@ function App() {
             <article className="social-card">
               <h3>Find me online</h3>
               <div className="social-links">
-                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/nkulieshova/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                   in
                 </a>
-                <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub">
+                <a href="https://github.com/Kulieshova" target="_blank" rel="noreferrer" aria-label="GitHub">
                   🐙
                 </a>
                 <a href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="Twitter">
